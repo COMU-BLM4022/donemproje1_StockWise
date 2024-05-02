@@ -1,0 +1,1 @@
+# donemproje1_StockWise
