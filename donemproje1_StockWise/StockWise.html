@@ -1486,9 +1486,8 @@ border-radius: 0px;
 </div>
 
 
-<div id="q1-ims-platformunun-belirlenmesi" class="section level3">
-<h3>Q1 : IMS platformunun belirlenmesi</h3>
-</div>
+<div id="q1-ims-platformunun-belirlenmesi" class="section level1">
+<h1>Q1 : IMS platformunun belirlenmesi</h1>
 <div id="platformun-ismi" class="section level2">
 <h2>Platformun İsmi</h2>
 <p>Odoo</p>
@@ -1556,6 +1555,207 @@ entegrasyon yetenekleri ile etkileyici sonuçlar elde etmiş olmamız.</li>
 </ul>
 <p>Bu faktörler bir araya geldiğinde, Odoo’nun işletmemiz için en uygun
 ERP platformu olduğunu düşünüyoruz.</p>
+</div>
+</div>
+<div id="q2-dataset-tanımı" class="section level1">
+<h1>Q2 : Dataset tanımı</h1>
+<div id="veri-setinin-içeriği" class="section level2">
+<h2>Veri Setinin İçeriği</h2>
+<p>İlk veri setinde, şirketimizin envanter yönetimi ile ilgili verileri
+içermektedir. Bu veriler şunları içermektedir: Ürün adı, Ürün ID, Ürün
+stokları, ürün fiyatları ve tedarikçi ID gibi envanter yönetimi
+süreçlerini kapsamaktadır.</p>
+<p>İkinci veri setinde ise, Satış ID, Müşteri ID, Satış Tarihi, Satış
+Miktarı, Ödeme Türü gibi transaction bilgileri tutulur.</p>
+</div>
+<div id="verinin-üretimi-toplanması" class="section level2">
+<h2>Verinin Üretimi / Toplanması</h2>
+<p>Kaggle üzerinden bulduğumuz ürün listesini kullanarak bir random data
+generator aracılığıyla Synthetic Data oluşturarak elde edeceğiz.</p>
+</div>
+<div id="verinin-formatı" class="section level2">
+<h2>Verinin Formatı</h2>
+<p>Veri seti, PostgreSQL veritabanında ilişkisel bir veri tabanı modeli
+olarak saklanmaktadır. Tablolar, ürünler, siparişler, müşteriler,
+tedarikçiler ve diğer ilgili bilgileri içeren birçok tablodan
+oluşur.</p>
+</div>
+<div id="verinin-boyutu" class="section level2">
+<h2>Verinin Boyutu</h2>
+<p>Veri setinde toplam boyut, depolanan verilerin türüne ve işlem
+hacmine bağlı olarak değişkenlik gösterebilir. Yaklaşık 10.000
+transaction ve 1.000 item üretmeyi planlıyoruz.</p>
+</div>
+<div id="verilerin-imse-ithali" class="section level2">
+<h2>Verilerin IMS’e İthali</h2>
+<p>Verilerin IMS’e ithal edilmesi aşağıdaki adımları içerecektir:</p>
+<ol style="list-style-type: decimal">
+<li>Veri setinin temizlenmesi ve ön işlemeye tabi tutulması,
+gerektiğinde veri dönüşümü ve formatlama işlemlerinin yapılması.</li>
+<li>Verilerin, Odoo platformundan çekilmesi ve uygun IMS veri modeline
+dönüştürülmesi.</li>
+<li>IMS tarafından sağlanan API’ler aracılığıyla verilerin IMS’e
+aktarılması.</li>
+</ol>
+</div>
+<div id="verilerin-r-ile-çekilmesi" class="section level2">
+<h2>Verilerin R ile Çekilmesi</h2>
+<p>Verilerin IMS’den R ile çekilmesi için şu yöntemler
+kullanılacaktır:</p>
+<ul>
+<li>IMS’in sağladığı RESTful API’ler aracılığıyla verilere erişim
+sağlanacaktır. Bu API’ler, gelişmiş sorgu ve filtreleme seçenekleri
+sunarak istenilen verilere erişimi kolaylaştıracaktır.</li>
+<li>R programlama dili kullanılarak, IMS’in kullanmış olduğu
+veritabanına doğrudan bağlanarak SQL sorguları aracılığıyla verilere
+erişim sağlanabilecektir.</li>
+</ul>
+</div>
+</div>
+<div id="q3-iş-tanımı" class="section level1">
+<h1>Q3 : İş tanımı</h1>
+<p>Belirli hizmetler karşılığında hesaplanan ve kurumsal müşterilerden
+ücret talep edilen bir gelir modeline sahiptir.</p>
+<div id="iş-tanımı" class="section level2">
+<h2>İş Tanımı</h2>
+<p>StockWise, Odoo platformunu kullanan bir envanter yönetimi
+şirketidir. Temel faaliyet alanımız, müşterilerimize envanter yönetimi
+yazılımı sağlamak ve bu yazılımın entegrasyonu, özelleştirmesi ve destek
+hizmetlerini sunmaktır.</p>
+</div>
+<div id="aktiviteler-ve-rutin-operasyonlar" class="section level2">
+<h2>Aktiviteler ve Rutin Operasyonlar</h2>
+<p>İşletmemizdeki ana faaliyetler ve rutin operasyonlar şunlardır:</p>
+<ul>
+<li>Müşteri İhtiyaçlarının Belirlenmesi ve Analizi</li>
+<li>Yazılım Satışı ve Abonelik Yönetimi</li>
+<li>Entegrasyon ve Özelleştirme Hizmetleri</li>
+<li>Teknik Destek ve Bakım Hizmetleri</li>
+<li>Eğitim ve Danışmanlık Hizmetleri</li>
+</ul>
+</div>
+<div id="gelir-modeli" class="section level2">
+<h2>Gelir Modeli</h2>
+<p>İşletmemizin gelir modeli aşağıdaki unsurları içerir:</p>
+<ul>
+<li>Yazılım Satışı: Müşterilere Odoo platformunu kullanarak envanter
+yönetimi yazılımı satışı yapılır.</li>
+<li>Abonelik Modeli: Müşteriler, yazılımın kullanımı için belirli
+periyodik ücretler öderler.</li>
+<li>Entegrasyon ve Özelleştirme Hizmetleri: Müşterilere yazılımın mevcut
+sistemlerine entegrasyon ve özelleştirme hizmetleri sunulur.</li>
+<li>Destek ve Bakım Hizmetleri: Müşterilere yazılımın kullanımıyla
+ilgili teknik destek ve bakım hizmetleri sunulur.</li>
+<li>Eğitim ve Danışmanlık Hizmetleri: Müşterilere yazılımın kullanımıyla
+ilgili eğitim ve danışmanlık hizmetleri sağlanır.</li>
+</ul>
+</div>
+<div id="zorluklar-ve-avantajlar" class="section level2">
+<h2>Zorluklar ve Avantajlar</h2>
+<p>İşimizin ve iş modelimizin zorlukları ve avantajları şunlardır:</p>
+<p><strong>Zorluklar:</strong> - Rekabet: Pazarda birçok envanter
+yönetimi çözümü bulunmaktadır ve rekabet oldukça yoğundur. - Teknolojik
+Değişimler: Teknolojik gelişmeler hızla değişmekte ve işletmemizin bu
+değişimlere ayak uydurması gerekmektedir. - Müşteri İhtiyaçlarının
+Çeşitliliği: Müşterilerin envanter yönetimi ihtiyaçları oldukça
+çeşitlidir ve bu ihtiyaçlara uygun çözümler sunmak zor olabilir.</p>
+<p><strong>Avantajlar:</strong> - Odoo Platformu: Odoo’nun esnek ve
+modüler yapısı, işletmemize geniş bir özelleştirme ve entegrasyon
+yeteneği sunar. - Geniş Hizmet Yelpazesi: İşletmemiz, müşterilerimize
+çeşitli hizmetler sunarak rekabet avantajı elde eder.</p>
+</div>
+<div id="gerçek-dünya-rakipleri-ve-avantajlar-dezavantajlar" class="section level2">
+<h2>Gerçek Dünya Rakipleri ve Avantajlar / Dezavantajlar</h2>
+<p>İşletmemizin gerçek dünya rakipleri ve onların avantajları ve
+dezavantajları şunlardır:</p>
+<div id="rakip-şirket-1-sap" class="section level3">
+<h3>Rakip Şirket 1: SAP</h3>
+<ul>
+<li><strong>Avantajlar:</strong>
+<ul>
+<li>Geniş müşteri tabanı: SAP, dünya çapında birçok büyük ve orta
+ölçekli işletmenin tercih ettiği bir ERP çözümüdür.</li>
+<li>Yüksek marka bilinirliği: SAP, endüstri lideri bir marka olarak
+tanınır ve güvenilirliği ile bilinir.</li>
+</ul></li>
+<li><strong>Dezavantajlar:</strong>
+<ul>
+<li>Esneklik eksikliği: SAP, bazı durumlarda esneklik ve özelleştirme
+konusunda kısıtlamalar getirebilir, özellikle küçük ve orta ölçekli
+işletmeler için bu bazen dezavantaj olabilir.</li>
+<li>Yüksek fiyatlandırma: SAP’nin genellikle yüksek lisans maliyetleri
+ve uygulama maliyetleri vardır, bu da bazı işletmeler için maliyet etkin
+olmayabilir.</li>
+</ul></li>
+</ul>
+</div>
+<div id="rakip-şirket-2-microsoft-dynamics" class="section level3">
+<h3>Rakip Şirket 2: Microsoft Dynamics</h3>
+<ul>
+<li><strong>Avantajlar:</strong>
+<ul>
+<li>Teknolojik yenilikler: Microsoft Dynamics, Microsoft’un teknolojik
+altyapısı ile entegre olduğu için sürekli olarak güncellenen ve
+geliştirilen bir platformdur.</li>
+<li>Özelleştirme yeteneği: Microsoft Dynamics, geniş bir özelleştirme ve
+entegrasyon yeteneği sunar, bu da işletmelerin ihtiyaçlarına göre adapte
+edilebilir bir çözüm sağlar.</li>
+</ul></li>
+<li><strong>Dezavantajlar:</strong>
+<ul>
+<li>Düşük marka bilinirliği: Microsoft Dynamics, SAP kadar yaygın olarak
+bilinmese de, yine de endüstri lideri bir marka değildir, bu da bazı
+işletmeler için güvenilirlik sorunu yaratabilir.</li>
+<li>Sınırlı entegrasyon seçenekleri: Microsoft Dynamics, genellikle
+Microsoft ürünleri ve teknolojileri ile entegre edilmiş olsa da, diğer
+üçüncü taraf sistemlerle entegrasyon konusunda bazı kısıtlamalara sahip
+olabilir.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="q4-iyileştirme-optimizasyon-stratejisi" class="section level1">
+<h1>Q4 : İyileştirme (optimizasyon) stratejisi</h1>
+<div id="fayda-sağlanacak-alanlar-ve-planlar" class="section level2">
+<h2>Fayda Sağlanacak Alanlar ve Planlar</h2>
+<p>Projenin son döneminde R kodu yazarak yapacağımız veri analizi ile
+aşağıdaki alanlarda basit optimizasyon örnekleri üzerinde çalışmayı
+planlıyoruz:</p>
+<div id="stok-yönetimi-optimizasyonu" class="section level3">
+<h3>1. Stok Yönetimi Optimizasyonu</h3>
+<ul>
+<li><strong>Fayda:</strong> Stok tutma maliyetlerini azaltmak ve stok
+devir hızını artırmak.</li>
+<li><strong>Plan:</strong> Stok verilerini analiz ederek talep tahmin
+modelleri geliştirmek ve stok seviyelerini optimize etmek için basit
+regresyon ve zaman serisi analizi kullanmak.</li>
+</ul>
+</div>
+<div id="ürün-fiyatlandırma-optimizasyonu" class="section level3">
+<h3>2. Ürün Fiyatlandırma Optimizasyonu</h3>
+<ul>
+<li><strong>Fayda:</strong> Karlılığı artırmak ve rekabetçi fiyatlar
+belirlemek.</li>
+<li><strong>Plan:</strong> Ürün satış verilerini analiz ederek
+fiyat-ürün ilişkilerini incelemek ve optimum fiyatları belirlemek için
+basit kar-marj analizi yapmak.</li>
+</ul>
+</div>
+<div id="tedarik-zinciri-verimliliği" class="section level3">
+<h3>3. Tedarik Zinciri Verimliliği</h3>
+<ul>
+<li><strong>Fayda:</strong> Tedarik zinciri süreçlerini iyileştirerek
+maliyetleri azaltmak.</li>
+<li><strong>Plan:</strong> Tedarikçi performansını izlemek ve stok
+seviyelerini optimize etmek için basit veri görselleştirme ve analizini
+kullanmak.</li>
+</ul>
+<p>Bu basit optimizasyon stratejilerini gerçekleştirerek işletmenin
+performansını artırarak daha rekabetçi bir konuma gelmeyi ve uzun vadeli
+başarı sağlamayı hedefliyoruz.</p>
+</div>
+</div>
 </div>
 
 
