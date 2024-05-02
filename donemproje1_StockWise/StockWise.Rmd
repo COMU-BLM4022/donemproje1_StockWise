@@ -1,0 +1,103 @@
+---
+title: "StockWise"
+author: 
+date: "2024-05-02"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+### Q1 : IMS platformunun belirlenmesi
+
+
+## Platformun İsmi
+
+Odoo
+
+## Lisansı
+
+Odoo, açık kaynaklı bir ERP (Enterprise Resource Planning) platformudur ve açık kaynaklı LGPLv3 lisansı altında sunulmaktadır.
+
+## Kısa Tarihçe
+
+Odoo, 2005 yılında Belçika merkezli bir yazılım şirketi olan Fabien Pinckaers tarafından kurulmuştur. Başlangıçta "TinyERP" olarak adlandırılan platform, daha sonra "OpenERP" olarak yeniden adlandırılmış ve son olarak "Odoo" adını almıştır.
+
+## Platformun Sunduğu Özellikler
+
+- Müşteri İlişkileri Yönetimi (CRM)
+- Satış Yönetimi
+- Satın Alma Yönetimi
+- Muhasebe ve Finans Yönetimi
+- Stok Yönetimi
+- İnsan Kaynakları Yönetimi (HR)
+- Üretim Yönetimi
+- Proje Yönetimi
+- E-ticaret
+- Ve daha fazlası...
+
+## Kullanılan Yazılım, Veritabanı ve Diğer Teknolojiler
+
+- Odoo, Python programlama dili kullanılarak geliştirilmiştir.
+- Veritabanı olarak PostgreSQL kullanılmaktadır.
+- Odoo'nun kullanıcı arayüzü için JavaScript, HTML, ve CSS kullanılmaktadır.
+
+## Platformun API'si
+
+Odoo, RESTful API'ler aracılığıyla geniş bir entegrasyon yeteneği sunmaktadır. API, aşağıdaki özellikleri destekler:
+
+- Müşteri ve Tedarikçi Yönetimi
+- Ürün Yönetimi
+- Satış ve Satın Alma İşlemleri
+- Stok Yönetimi
+- Muhasebe İşlemleri
+- Ve daha fazlası...
+
+## IMS Kategorisi / Platform Seçimi
+
+Odoo platformunu seçmemizde rol oynayan sebepler:
+
+- Odoo'nun geniş modüler yapısı, işletmelerin ihtiyaçlarına göre özelleştirilebilir olması.
+- Açık kaynaklı olması ve güçlü bir topluluk desteğine sahip olması.
+- Önceki deneyimlerimizde Odoo'nun kullanıcı dostu arayüzü ve kolay entegrasyon yetenekleri ile etkileyici sonuçlar elde etmiş olmamız.
+- Sektörde Odoo'nun popülerliği ve yaygınlığı.
+
+Bu faktörler bir araya geldiğinde, Odoo'nun işletmemiz için en uygun ERP platformu olduğunu düşünüyoruz.
+
+## Q2 : Dataset tanımı
+
+# Veri Seti Bilgileri
+
+## Veri Setinin İçeriği
+
+İlk veri setinde, şirketimizin envanter yönetimi ile ilgili verileri içermektedir. Bu veriler şunları içermektedir:
+Ürün adı, Ürün ID, Ürün stokları, ürün fiyatları ve tedarikçi ID gibi envanter yönetimi süreçlerini kapsamaktadır.
+
+İkinci veri setinde ise, Satış ID, Müşteri ID, Satış Tarihi, Satış Miktarı, Ödeme Türü gibi transaction bilgileri tutulur.
+
+## Verinin Üretimi / Toplanması
+
+Kaggle üzerinden bulduğumuz ürün listesini kullanarak bir random data generator aracılığıyla Synthetic Data oluşturarak elde edeceğiz.
+
+## Verinin Formatı
+
+Veri seti, PostgreSQL veritabanında ilişkisel bir veri tabanı modeli olarak saklanmaktadır. Tablolar, ürünler, siparişler, müşteriler, tedarikçiler ve diğer ilgili bilgileri içeren birçok tablodan oluşur.
+
+## Verinin Boyutu
+
+Veri setinde toplam boyut, depolanan verilerin türüne ve işlem hacmine bağlı olarak değişkenlik gösterebilir. Yaklaşık 10.000 transaction ve 1.000 item üretmeyi planlıyoruz.
+
+## Verilerin IMS'e İthali
+
+Verilerin IMS'e ithal edilmesi aşağıdaki adımları içerecektir:
+
+1. Veri setinin temizlenmesi ve ön işlemeye tabi tutulması, gerektiğinde veri dönüşümü ve formatlama işlemlerinin yapılması.
+2. Verilerin, Odoo platformundan çekilmesi ve uygun IMS veri modeline dönüştürülmesi.
+3. IMS tarafından sağlanan API'ler aracılığıyla verilerin IMS'e aktarılması.
+
+## Verilerin R ile Çekilmesi
+
+Verilerin IMS'den R ile çekilmesi için şu yöntemler kullanılacaktır:
+
+- IMS'in sağladığı RESTful API'ler aracılığıyla verilere erişim sağlanacaktır. Bu API'ler, gelişmiş sorgu ve filtreleme seçenekleri sunarak istenilen verilere erişimi kolaylaştıracaktır.
+- R programlama dili kullanılarak, IMS'in kullanmış olduğu veritabanına doğrudan bağlanarak SQL sorguları aracılığıyla verilere erişim sağlanabilecektir.
