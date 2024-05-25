@@ -1,0 +1,13 @@
+---
+title: "Bilgi Yönetim Sistemleri - Bitirme Projesi Rapor"
+author: "Alper Kuzucuoglu 200401091 Ömer Faruk Tekin 200401013 Soner Gezgin 200401085 Husam Salah 180401122
+         "
+date: "2024-05-22"
+output: html_document
+---
+
+# **Q1: İş Probleminin Tanımı**
+
+İş problemimiz, bir e-ticaret şirketinin envanter yönetimini optimize etme ihtiyacıdır. Bu raporda, envanter yönetiminde kullanılacak BYS (Bilgi Yönetim Sistemi) platformunu ele alacağız. BYS platformu, envanter yönetiminde gerçek zamanlı izleme, stok takibi, tedarik zinciri yönetimi gibi özellikler sunmaktadır. Bu özellikler sayesinde, e-ticaret şirketi stok seviyelerini optimize edebilir, talep tahmini yapabilir ve tedarik zinciri operasyonlarını daha etkin hale getirebilir. İş süreçlerimizde, BYS platformunun stok kontrolü, tedarik yönetimi ve raporlama gibi özelliklerinden yararlanarak envanter yönetimini iyileştirmeyi planlıyoruz.
+
+**Not:** Proje kapsamında projemize daha uyumlu olan yeni bir veri seti bulduğumuz için artık bu yeni veri setini kullanıyoruz.
