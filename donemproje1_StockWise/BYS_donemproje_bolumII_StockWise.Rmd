@@ -164,3 +164,32 @@ ggplot(veri, aes(x = log(UnitPrice), y = log(Quantity), color = Quantity)) +
   theme(legend.position = "bottom")
 
 ```
+
+
+# **Q4: Veri Setinin BYS Platformuna İthali**
+
+Veri setini Odoo platformuna entegre etmek için platformun web sitesi üzerindeki yükleme arayüzünü kullandık. Bu yöntem, veri setini platforma yüklemek için kolay ve kullanıcı dostu bir çözüm sundu.
+
+## *Veri Yükleme Süreci*
+
+1. *Web Sitesi Üzerinden Yükleme:*
+    - Odoo platformunun web sitesine giriş yaptık.
+    - Veri yükleme bölümüne geçtik. Bu bölüm "Import Data" menü başlığı altında bulunur.
+    - Yükleme arayüzünde, veri dosyamızı seçtik ve yükleme işlemini başlattık.
+
+2. *Veri Doğrulama ve İthalat:*
+    - Yükleme işlemi sırasında Odoo platformu, veri setini doğrulamak için bazı otomatik kontroller gerçekleştirdi. Bu kontroller, veri setinin formatı ve içeriğinin Odoo platformunun gereksinimlerine uygun olup olmadığını kontrol eder.
+    - Tüm kontroller başarıyla geçildikten sonra, veri seti platforma yüklendi ve kullanılabilir hale geldi.
+
+## *İthalat Sürecinin Detayları*
+
+Veri setini web sitesi üzerinden yükleme işlemi, Odoo platformunun kullanıcı dostu arayüzü sayesinde oldukça basitti. Aşağıda bu işlemi özetleyen adımlar verilmiştir:
+
+1. Veri setini .XLSX formatında kaydettik.
+2. Odoo BYS platformunun web sitesine giriş yaptık ve kullanacağımız uygulamaya girip veri yükleme arayüzüne girdik.
+3. "Dosya Seç" butonuna tıklayarak veri setini içeren .XLSX dosyasını seçtik.
+4. "Yükle" butonuna tıklayarak veri yükleme işlemini başlattık.
+5. Yükleme tamamlandıktan sonra, platformdaki şablonun sütünları ile kendi veri setimizdeki sütünları eşleştirerek veri setini platformda kullanılabilir hale getirdik.
+
+Bu süreç, veri setinin Odoo BYS platformuna sorunsuz bir şekilde entegre edilmesini sağlamıştır. Bir Rest API kullanmadan, web sitesi üzerinden veri yükleme işlemi gerçekleştirilmiştir.
+
