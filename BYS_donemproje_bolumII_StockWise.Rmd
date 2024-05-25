@@ -1,0 +1,24 @@
+---
+title: "Bilgi Yönetim Sistemleri - Bitirme Projesi Rapor"
+author: "Alper Kuzucuoglu 200401091 Ömer Faruk Tekin 200401013 Soner Gezgin 200401085 Husam Salah 180401122
+         "
+date: "2024-05-22"
+output: html_document
+---
+
+# **Q1: İş Probleminin Tanımı**
+
+İş problemimiz, bir e-ticaret şirketinin envanter yönetimini optimize etme ihtiyacıdır. Bu raporda, envanter yönetiminde kullanılacak BYS (Bilgi Yönetim Sistemi) platformunu ele alacağız. BYS platformu, envanter yönetiminde gerçek zamanlı izleme, stok takibi, tedarik zinciri yönetimi gibi özellikler sunmaktadır. Bu özellikler sayesinde, e-ticaret şirketi stok seviyelerini optimize edebilir, talep tahmini yapabilir ve tedarik zinciri operasyonlarını daha etkin hale getirebilir. İş süreçlerimizde, BYS platformunun stok kontrolü, tedarik yönetimi ve raporlama gibi özelliklerinden yararlanarak envanter yönetimini iyileştirmeyi planlıyoruz.
+
+**Not:** Proje kapsamında projemize daha uyumlu olan yeni bir veri seti bulduğumuz için artık bu yeni veri setini kullanıyoruz.
+
+
+# **Q2: İş Problemini Çözmede Kullanılacak Veri Seti**
+
+İş problemini çözmek için kullanılacak veri seti, e-ticaret şirketinin geçmiş satış verilerini içermektedir. Bu veri seti, her satış işlemindeki ürünlerin satış adedi, fiyatı, açıklamaları, bazı kod bilgileri gibi çeşitli öznitelikleri içermektedir.
+
+Veri setini Kaggle platformunda bulduk. Veri seti, anonimleştirilmiş bir şekilde e-ticaret şirketinin iç veri tabanından elde edilmiştir. Şirket, her satış işlemi için fatura numarası, stok kodları, ürün açıklamaları, ürünlerin adet ve fiyatlarını, satın alma tarihlerini, müşteri numaralarını ve ülkelerini içeren bir veri tabanına sahiptir. Bu veri seti, bu veri tabanından toplanarak oluşturulmuştur.
+
+Veri setinin büyüklüğünden ötürü(550.000+ veri) ve veri setindeki bazı eksik/aykırı değerlerden dolayı veri setini biraz daha küçülttük(50.000+ veri). Eksik/aykırı değerleri verisetinden temizledik.
+
+Ayrıca, analizlerimizde bazı öznitelikleri birleştirerek yeni öznitelikler oluşturup ve veri setini daha anlamlı hale getireceğiz. Sentetik veri üretimi yapmadık, ancak veri setindeki mevcut özniteliklerden bazılarıyla yeni öznitelikler oluşturduk. (Örneğin: fiyat*adet = Satıştaki ürünün ciroya katkı miktarı)
