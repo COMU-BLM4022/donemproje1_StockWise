@@ -205,3 +205,7 @@ Bu süreç, veri setinin Odoo BYS platformuna sorunsuz bir şekilde entegre edil
 - ABC analiz yöntemi kullanarak, en çok gelir elde eden en yüksek %20'lik ürünler A, %20 ila %70 arasındaki ürünler B, %70 ile %100 arasındakiler C olarak gruplandırılması
 - Ürünlerin gruplar arası her bir çeyrekte pozitif veya negatif değişimini gösteren grafiklerin analizi
 - Satılmış ürünlerin her çeyrekte ne ölçüde satıldığını sektörde kullanılan performans göstergelerine göre ölçülmesi ve buna bağlı olarak gelecek zaman için verilecek tavsiyelerin analizi 
+
+# **Q6: Çalışan Platformun Gösterildiği Sesli Anlatımlı Video**
+***YouTube Linki:*** **[https://www.youtube.com/watch?v=WqhwArf7lhI](https://www.youtube.com/watch?v=WqhwArf7lhI)**<br>
+[![Video](https://img.youtube.com/vi/WqhwArf7lhI/0.jpg)](https://www.youtube.com/watch?v=WqhwArf7lhI)
