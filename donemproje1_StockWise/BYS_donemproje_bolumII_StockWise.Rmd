@@ -193,3 +193,15 @@ Veri setini web sitesi üzerinden yükleme işlemi, Odoo platformunun kullanıc�
 
 Bu süreç, veri setinin Odoo BYS platformuna sorunsuz bir şekilde entegre edilmesini sağlamıştır. Bir Rest API kullanmadan, web sitesi üzerinden veri yükleme işlemi gerçekleştirilmiştir.
 
+
+# **Q5: Yapılması Planlanan Veri Analizi**
+
+- Yüksek hacimli veri setinden belirli bir miktar rastgele örneklem alma ve bunu gerçekleştirirken yanlılıktan kaçma teknikleri kullanmak
+- Aldığımız örneklemin zengin içerik ve yeterince rastgele olmasına özen göstererek bununla beraber en gerçekçi ve doğal sonuçlar çıkartma, bu sonuçları grafik/tablolar ile görselleştirmek
+- Yeterli ön işleme operasyonları gerçekleştirerek verinin temiz olmasını temin etmek
+- Elimizdeki işlenmiş temiz verinin ideallerimiz doğrultusunda anlamlı bilgi çıkarmak yolunda zenginleştirilmesi
+- Verileri yılın her bir çeyreğini ayrı bir veri yapısında tutacak şekilde ay bilgisine göre ayırmak 
+- Yılın her çeyreğinde her bir ayrı ürün için ne kadar satıldığı ve ne fiyatla satıldığına göre toplam gelire göre en çok gelir elde edilenden en aza doğru sıralanması
+- ABC analiz yöntemi kullanarak, en çok gelir elde eden en yüksek %20'lik ürünler A, %20 ila %70 arasındaki ürünler B, %70 ile %100 arasındakiler C olarak gruplandırılması
+- Ürünlerin gruplar arası her bir çeyrekte pozitif veya negatif değişimini gösteren grafiklerin analizi
+- Satılmış ürünlerin her çeyrekte ne ölçüde satıldığını sektörde kullanılan performans göstergelerine göre ölçülmesi ve buna bağlı olarak gelecek zaman için verilecek tavsiyelerin analizi 
