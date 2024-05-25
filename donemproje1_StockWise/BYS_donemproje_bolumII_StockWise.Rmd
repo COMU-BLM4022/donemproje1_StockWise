@@ -22,3 +22,190 @@ Veri setini Kaggle platformunda bulduk. Veri seti, anonimleştirilmiş bir şeki
 Veri setinin büyüklüğünden ötürü(550.000+ veri) ve veri setindeki bazı eksik/aykırı değerlerden dolayı veri setini biraz daha küçülttük(50.000+ veri). Eksik/aykırı değerleri verisetinden temizledik.
 
 Ayrıca, analizlerimizde bazı öznitelikleri birleştirerek yeni öznitelikler oluşturup ve veri setini daha anlamlı hale getireceğiz. Sentetik veri üretimi yapmadık, ancak veri setindeki mevcut özniteliklerden bazılarıyla yeni öznitelikler oluşturduk. (Örneğin: fiyat*adet = Satıştaki ürünün ciroya katkı miktarı)
+
+
+# **Q3: Veri Seti Keşifsel Analizi**
+
+## *Veri Setinin Önemli Satırları ve Sütunları*
+- InvoiceNo: Her satış işlemine özgü fatura numarası
+- StockCode: Satılan ürünün kodu
+- Description: Satılan ürünün açıklaması
+- Quantity: Satılan ürünün adeti
+- UnitPrice: Satılan ürünün birim fiyatı
+- InvoiceDate: Satışın gerçekleştiği tarih
+- CustomerID: Satışı yapan müşterinin numarası
+- Country: Müşterinin bulunduğu ülke
+
+## *Veri Setindeki Veri Türleri ve Problemler*
+- InvoiceNo: Character
+- StockCode: Character
+- Description: Character
+- Quantity: Numeric
+- UnitPrice: Numeric
+- InvoiceDate: Character
+- CustomerID: Character
+- Country: Character
+
+Orjinal veri setinde eksik veriler ve yanlış/manasız veriler bulunmaktadır. Ancak, bazı sütunlardaki eksik verileri temizledik ve sayısal değerleri düzelttik.
+
+## *Ön İşleme Operasyonları*
+
+-Veri seti üzerinde bulunan Quantity, UnitPrice gibi sütünlara ait verilerde bozuk değerlerin omit edilmesi
+-Bozuk değerler haricindeki kayıp veya tanımsız olan verilerin ihmal edilmesi (NA veya NaN olan CustomerID ve Description satırları)
+-Farklı veri tipindeki değerlerin istenilen veri tipine dönüştürülmesi(Character tipindeki InvoiceDate değerlerinin Date tipine dönüştürülmesi)
+-Ay, gün, yıl olarak %m/%d/%Y formatında bulunan InvoiceDate tarih değerlerinin, yılın çeyreklerine göre sınıflandırılacak hale getirilmesi
+
+## *Kullanacağımız Verisetinin Tablo Ve Grafikleri*
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
+```
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+library(readr)
+library(DT)
+library(ggplot2)
+library(dplyr)
+library(knitr)
+
+# CSV dosyasını okuma ve yazma
+veri <- read_csv("SAMPLE_TABLE.csv", show_col_types = FALSE)
+datatable(head(veri, 100))
+```
+
+#### Zaman Serisi Grafiği
+###### *Amacı: Satışların zaman içindeki eğilimini görmek için kullanılır.*
+###### *Analizlerde Nasıl İşimize Yarar:*
+
+- **Trend Analizi:** Günlük satış miktarlarını zaman serisi grafiğinde görselleştirerek, satışların belirli dönemlerde artıp azaldığını görebiliriz. Örneğin, tatil dönemlerinde veya özel kampanya dönemlerinde satışlarda ani artışlar olup olmadığını belirleyebiliriz.
+- **Sezonluk Dalgalanmalar:** Sezonluk eğilimleri ve dalgalanmaları tespit edebiliriz. Bu, stok yönetimini ve pazarlama stratejilerini optimize etmek için önemlidir.
+- **Anomali Tespiti:** Anormal satış artışları veya düşüşleri, potansiyel sorunları veya fırsatları belirlememize yardımcı olabilir.
+
+```{r}
+# InvoiceDate'yi tarih formatına çevirme
+veri$InvoiceDate <- as.Date(veri$InvoiceDate, format="%m/%d/%Y")
+
+# Günlük satış miktarlarını hesaplama
+gunluk_satis <- veri %>%
+  group_by(InvoiceDate) %>%
+  summarise(ToplamSatis = sum(Quantity))
+
+# Zaman serisi grafiği oluşturma
+ggplot(gunluk_satis, aes(x = InvoiceDate, y = ToplamSatis)) +
+  geom_line() +
+  labs(title = "Günlük Satış Miktarları",
+       x = "Tarih",
+       y = "Satış Miktarı")+
+  theme_minimal() +
+  scale_x_date(date_labels = "%b")
+```
+
+##### Barkod Grafiği
+###### *Amacı: En çok satılan ürünlerin görselleştirilmesi için kullanılır.*
+###### *Analizlerde Nasıl İşimize Yarar:*
+
+- **Popüler Ürünler:** Hangi ürünlerin en çok satıldığını belirleyebiliriz. Bu, stoklama kararları ve pazarlama stratejileri için kritiktir.
+- **Ürün Çeşitliliği:** Ürün çeşitliliğinin satış performansı üzerindeki etkisini analiz edebiliriz. Belirli ürün kategorilerinin satış performanslarını karşılaştırarak en çok talep gören ürün gruplarını tespit edebiliriz.
+- **Pazarlama Stratejileri:** Pazarlama kampanyalarının hangi ürünler üzerinde daha etkili olduğunu görebiliriz. Örneğin, belirli ürünlerin satışlarında ani artışlar, başarılı kampanyaları işaret edebilir.
+```{r}
+# En çok satılan 10 ürünün hesaplama
+top_urunler <- veri %>%
+  group_by(Description) %>%
+  summarise(ToplamSatis = sum(Quantity)) %>%
+  arrange(desc(ToplamSatis)) %>%
+  head(10)
+
+# Barkod grafiği oluşturma
+ggplot(top_urunler, aes(x = reorder(Description, ToplamSatis), y = ToplamSatis, fill = ToplamSatis)) +
+  geom_bar(stat="identity") +
+  coord_flip() +
+  labs(title = "En Çok Satılan 10 Ürün",
+       x = "Ürün",
+       y = "Satış Miktarı") +
+  scale_fill_gradient(low = "lightblue", high = "blue") +
+  theme_minimal()
+```
+
+##### Dağılım Grafiği
+###### *Amacı: Fiyat ve satış adedi arasındaki ilişkiyi görmek için kullanılır.*
+###### *Analizlerde Nasıl İşimize Yarar:*
+
+- **Fiyatlandırma Stratejileri:** Fiyat ve satış adedi arasındaki ilişkiyi analiz ederek optimal fiyat noktalarını belirleyebiliriz. Bu, fiyatlandırma stratejilerini geliştirmek için önemlidir.
+- **Talep Elastikiyeti:** Farklı fiyat seviyelerinde ürünlerin talep esnekliğini görebiliriz. Bu, hangi ürünlerin fiyat değişikliklerine karşı daha duyarlı olduğunu anlamamıza yardımcı olabilir.
+- **Pazar Segmentasyonu:** Ürünlerin farklı fiyat kategorilerindeki performanslarını analiz ederek, pazar segmentlerini daha iyi anlayabilir ve bu segmentlere yönelik stratejiler geliştirebiliriz.
+
+```{r}
+# Paketleri yükleme
+library(viridis)
+
+# Dağılım grafiği oluşturma
+
+ggplot(veri, aes(x = UnitPrice, y = Quantity, color = Quantity)) +
+  geom_point(alpha = 0.6, size = 2) +
+  scale_color_viridis(option = "D", direction = 1) +
+  labs(title = "Fiyat ve Satış Adedi Arasındaki İlişki",
+       x = "Birim Fiyat",
+       y = "Satış Miktarı",
+       color = "Satış Miktarı") +
+  theme_minimal() +
+  theme(legend.position = "bottom")
+```
+
+
+```{r}
+# Dağılım grafiğinde logaritmik ölçekle okunabilirliği arttırdık
+ggplot(veri, aes(x = log(UnitPrice), y = log(Quantity), color = Quantity)) +
+  geom_point(alpha = 0.6, size = 2) +
+  scale_color_viridis(option = "D", direction = 1) +
+  labs(title = "Fiyat ve Satış Adedi Arasındaki İlişki (Logaritmik Ölçek)",
+       x = "log(Birim Fiyat)",
+       y = "log(Satış Miktarı)",
+       color = "Satış Miktarı") +
+  theme_minimal() +
+  theme(legend.position = "bottom")
+
+```
+
+
+# **Q4: Veri Setinin BYS Platformuna İthali**
+
+Veri setini Odoo platformuna entegre etmek için platformun web sitesi üzerindeki yükleme arayüzünü kullandık. Bu yöntem, veri setini platforma yüklemek için kolay ve kullanıcı dostu bir çözüm sundu.
+
+## *Veri Yükleme Süreci*
+
+1. *Web Sitesi Üzerinden Yükleme:*
+    - Odoo platformunun web sitesine giriş yaptık.
+    - Veri yükleme bölümüne geçtik. Bu bölüm "Import Data" menü başlığı altında bulunur.
+    - Yükleme arayüzünde, veri dosyamızı seçtik ve yükleme işlemini başlattık.
+
+2. *Veri Doğrulama ve İthalat:*
+    - Yükleme işlemi sırasında Odoo platformu, veri setini doğrulamak için bazı otomatik kontroller gerçekleştirdi. Bu kontroller, veri setinin formatı ve içeriğinin Odoo platformunun gereksinimlerine uygun olup olmadığını kontrol eder.
+    - Tüm kontroller başarıyla geçildikten sonra, veri seti platforma yüklendi ve kullanılabilir hale geldi.
+
+## *İthalat Sürecinin Detayları*
+
+Veri setini web sitesi üzerinden yükleme işlemi, Odoo platformunun kullanıcı dostu arayüzü sayesinde oldukça basitti. Aşağıda bu işlemi özetleyen adımlar verilmiştir:
+
+1. Veri setini .XLSX formatında kaydettik.
+2. Odoo BYS platformunun web sitesine giriş yaptık ve kullanacağımız uygulamaya girip veri yükleme arayüzüne girdik.
+3. "Dosya Seç" butonuna tıklayarak veri setini içeren .XLSX dosyasını seçtik.
+4. "Yükle" butonuna tıklayarak veri yükleme işlemini başlattık.
+5. Yükleme tamamlandıktan sonra, platformdaki şablonun sütünları ile kendi veri setimizdeki sütünları eşleştirerek veri setini platformda kullanılabilir hale getirdik.
+
+Bu süreç, veri setinin Odoo BYS platformuna sorunsuz bir şekilde entegre edilmesini sağlamıştır. Bir Rest API kullanmadan, web sitesi üzerinden veri yükleme işlemi gerçekleştirilmiştir.
+
+
+# **Q5: Yapılması Planlanan Veri Analizi**
+
+- Yüksek hacimli veri setinden belirli bir miktar rastgele örneklem alma ve bunu gerçekleştirirken yanlılıktan kaçma teknikleri kullanmak
+- Aldığımız örneklemin zengin içerik ve yeterince rastgele olmasına özen göstererek bununla beraber en gerçekçi ve doğal sonuçlar çıkartma, bu sonuçları grafik/tablolar ile görselleştirmek
+- Yeterli ön işleme operasyonları gerçekleştirerek verinin temiz olmasını temin etmek
+- Elimizdeki işlenmiş temiz verinin ideallerimiz doğrultusunda anlamlı bilgi çıkarmak yolunda zenginleştirilmesi
+- Verileri yılın her bir çeyreğini ayrı bir veri yapısında tutacak şekilde ay bilgisine göre ayırmak 
+- Yılın her çeyreğinde her bir ayrı ürün için ne kadar satıldığı ve ne fiyatla satıldığına göre toplam gelire göre en çok gelir elde edilenden en aza doğru sıralanması
+- ABC analiz yöntemi kullanarak, en çok gelir elde eden en yüksek %20'lik ürünler A, %20 ila %70 arasındaki ürünler B, %70 ile %100 arasındakiler C olarak gruplandırılması
+- Ürünlerin gruplar arası her bir çeyrekte pozitif veya negatif değişimini gösteren grafiklerin analizi
+- Satılmış ürünlerin her çeyrekte ne ölçüde satıldığını sektörde kullanılan performans göstergelerine göre ölçülmesi ve buna bağlı olarak gelecek zaman için verilecek tavsiyelerin analizi 
+
+# **Q6: Çalışan Platformun Gösterildiği Sesli Anlatımlı Video**
+***YouTube Linki:*** **[https://www.youtube.com/watch?v=WqhwArf7lhI](https://www.youtube.com/watch?v=WqhwArf7lhI)**<br>
+[![Video](https://img.youtube.com/vi/WqhwArf7lhI/0.jpg)](https://www.youtube.com/watch?v=WqhwArf7lhI)
